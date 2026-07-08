@@ -1,0 +1,652 @@
+<title>Lead Qualification — Workflow Diagram</title>
+<style>
+  :root {
+    --bg: #f6f5f1;
+    --surface: #ffffff;
+    --ink: #1e1d1b;
+    --ink-dim: #6b6862;
+    --ink-faint: #9a968d;
+    --border: #e2ded4;
+    --border-strong: #d3cdc0;
+    --accent: #2f6f6b;
+    --accent-soft: #e4efed;
+    --manual: #b5691f;
+    --manual-soft: #f5e9da;
+    --warn: #a8402f;
+    --warn-soft: #f6e4df;
+    --app-website: #5b6b7a;
+    --app-website-soft: #e7ebee;
+    --app-hubspot: #c76a2f;
+    --app-hubspot-soft: #f4e5d8;
+    --app-clay: #6f5fa0;
+    --app-clay-soft: #e9e5f3;
+    --app-slack: #8a4f7d;
+    --app-slack-soft: #f1e4ee;
+    --shadow: 0 1px 2px rgba(30, 29, 27, 0.04), 0 6px 16px -8px rgba(30, 29, 27, 0.10);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17181a;
+      --surface: #1e2022;
+      --ink: #ece9e2;
+      --ink-dim: #a19c92;
+      --ink-faint: #726d64;
+      --border: #34363a;
+      --border-strong: #44474c;
+      --accent: #62b4ac;
+      --accent-soft: #1d2f2d;
+      --manual: #e0a15c;
+      --manual-soft: #362a1a;
+      --warn: #e17b68;
+      --warn-soft: #3a2521;
+      --app-website: #99a8b6;
+      --app-website-soft: #262b30;
+      --app-hubspot: #e3975a;
+      --app-hubspot-soft: #332419;
+      --app-clay: #ab9dd9;
+      --app-clay-soft: #2a2638;
+      --app-slack: #c98cba;
+      --app-slack-soft: #332430;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 6px 20px -8px rgba(0, 0, 0, 0.5);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #17181a;
+    --surface: #1e2022;
+    --ink: #ece9e2;
+    --ink-dim: #a19c92;
+    --ink-faint: #726d64;
+    --border: #34363a;
+    --border-strong: #44474c;
+    --accent: #62b4ac;
+    --accent-soft: #1d2f2d;
+    --manual: #e0a15c;
+    --manual-soft: #362a1a;
+    --warn: #e17b68;
+    --warn-soft: #3a2521;
+    --app-website: #99a8b6;
+    --app-website-soft: #262b30;
+    --app-hubspot: #e3975a;
+    --app-hubspot-soft: #332419;
+    --app-clay: #ab9dd9;
+    --app-clay-soft: #2a2638;
+    --app-slack: #c98cba;
+    --app-slack-soft: #332430;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 6px 20px -8px rgba(0, 0, 0, 0.5);
+  }
+  :root[data-theme="light"] {
+    --bg: #f6f5f1;
+    --surface: #ffffff;
+    --ink: #1e1d1b;
+    --ink-dim: #6b6862;
+    --ink-faint: #9a968d;
+    --border: #e2ded4;
+    --border-strong: #d3cdc0;
+    --accent: #2f6f6b;
+    --accent-soft: #e4efed;
+    --manual: #b5691f;
+    --manual-soft: #f5e9da;
+    --warn: #a8402f;
+    --warn-soft: #f6e4df;
+    --app-website: #5b6b7a;
+    --app-website-soft: #e7ebee;
+    --app-hubspot: #c76a2f;
+    --app-hubspot-soft: #f4e5d8;
+    --app-clay: #6f5fa0;
+    --app-clay-soft: #e9e5f3;
+    --app-slack: #8a4f7d;
+    --app-slack-soft: #f1e4ee;
+    --shadow: 0 1px 2px rgba(30, 29, 27, 0.04), 0 6px 16px -8px rgba(30, 29, 27, 0.10);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+  }
+
+  .page {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    padding: 48px 24px 80px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .doc {
+    width: 100%;
+    max-width: 760px;
+  }
+
+  .mono {
+    font-family: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+  }
+
+  /* ---------- Header ---------- */
+
+  .eyebrow {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  h1 {
+    font-size: 30px;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 6px 0 20px;
+    text-wrap: balance;
+    font-weight: 650;
+  }
+
+  .meta-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 40px;
+  }
+
+  .meta-cell {
+    background: var(--surface);
+    padding: 12px 16px;
+  }
+
+  .meta-label {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 4px;
+  }
+
+  .meta-value {
+    font-size: 13.5px;
+    color: var(--ink);
+    font-weight: 550;
+  }
+
+  .status-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-right: 6px;
+  }
+
+  /* ---------- Legend ---------- */
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-bottom: 36px;
+    padding: 12px 16px;
+    border: 1px dashed var(--border-strong);
+    border-radius: 10px;
+    font-size: 12.5px;
+    color: var(--ink-dim);
+  }
+
+  .legend-item { display: flex; align-items: center; gap: 7px; }
+
+  .legend-swatch {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  /* ---------- Pipeline ---------- */
+
+  .pipeline {
+    position: relative;
+  }
+
+  .step-row {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    column-gap: 18px;
+  }
+
+  .node-col {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  .node {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    font-weight: 700;
+    z-index: 2;
+    flex-shrink: 0;
+  }
+
+  .node.manual { background: var(--manual); }
+
+  .rail {
+    position: absolute;
+    top: 30px;
+    bottom: -18px;
+    left: 50%;
+    width: 2px;
+    transform: translateX(-1px);
+    background: var(--accent);
+    z-index: 1;
+  }
+
+  .rail.manual-rail {
+    background: repeating-linear-gradient(
+      to bottom,
+      var(--manual) 0,
+      var(--manual) 5px,
+      transparent 5px,
+      transparent 10px
+    );
+  }
+
+  .step-row:last-child .rail { display: none; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 18px;
+    box-shadow: var(--shadow);
+  }
+
+  .card.manual-card {
+    border-color: color-mix(in srgb, var(--manual) 45%, var(--border));
+  }
+
+  .card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+
+  .app-tag {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 3px 8px;
+    border-radius: 6px;
+  }
+
+  .app-tag.website { background: var(--app-website-soft); color: var(--app-website); }
+  .app-tag.hubspot { background: var(--app-hubspot-soft); color: var(--app-hubspot); }
+  .app-tag.clay    { background: var(--app-clay-soft);    color: var(--app-clay); }
+  .app-tag.slack   { background: var(--app-slack-soft);   color: var(--app-slack); }
+  .app-tag.ae      { background: var(--app-website-soft); color: var(--ink-dim); }
+
+  .badge-row {
+    display: flex;
+    gap: 6px;
+  }
+
+  .badge {
+    font-size: 10.5px;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    padding: 3px 7px;
+    border-radius: 5px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .badge.manual { background: var(--manual-soft); color: var(--manual); }
+
+  .step-title {
+    font-size: 15.5px;
+    font-weight: 600;
+    margin: 0 0 6px;
+    line-height: 1.35;
+  }
+
+  .step-direction {
+    font-size: 12.5px;
+    color: var(--ink-dim);
+    margin-bottom: 10px;
+  }
+
+  .step-direction .arrow { color: var(--ink-faint); padding: 0 4px; }
+
+  .step-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+  }
+
+  .data-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .chip {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    color: var(--ink-dim);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .owner {
+    font-size: 11.5px;
+    color: var(--ink-faint);
+    white-space: nowrap;
+  }
+
+  .owner strong { color: var(--ink-dim); font-weight: 600; }
+
+  /* ---------- Gate wrapper ---------- */
+
+  .gate-wrap {
+    position: relative;
+    margin: -6px 0 18px;
+    padding: 22px 0 4px;
+    border: 1.5px dashed color-mix(in srgb, var(--manual) 55%, var(--border));
+    border-radius: 14px;
+  }
+
+  .gate-wrap .step-row .card { margin-bottom: 14px; }
+  .gate-wrap .step-row:last-child .card { margin-bottom: 4px; }
+
+  .gate-label {
+    position: absolute;
+    top: -11px;
+    left: 50px;
+    background: var(--bg);
+    padding: 0 8px;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--manual);
+    font-weight: 700;
+  }
+
+  /* ---------- Failure callouts ---------- */
+
+  .flag {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    background: var(--warn-soft);
+    border: 1px solid color-mix(in srgb, var(--warn) 35%, var(--border));
+    border-radius: 8px;
+    padding: 8px 10px;
+    margin: -6px 0 18px 58px;
+    font-size: 12px;
+    color: var(--ink);
+    line-height: 1.45;
+  }
+
+  .flag-mark {
+    color: var(--warn);
+    font-weight: 700;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  /* ---------- Notes ---------- */
+
+  .notes {
+    margin-top: 44px;
+  }
+
+  .section-label {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 12px;
+  }
+
+  .note-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .note-list li {
+    display: flex;
+    gap: 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--warn);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink-dim);
+  }
+
+  .note-list li.info { border-left-color: var(--ink-faint); }
+
+  .note-ref {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--ink-faint);
+    flex-shrink: 0;
+    padding-top: 1px;
+  }
+
+  @media (max-width: 480px) {
+    .step-row { grid-template-columns: 32px 1fr; column-gap: 12px; }
+    .node { width: 24px; height: 24px; font-size: 11px; }
+    .flag, .gate-wrap .flag { margin-left: 44px; }
+    h1 { font-size: 25px; }
+  }
+</style>
+
+<div class="page">
+  <div class="doc">
+    <div class="eyebrow">GTM Workflow — Diagram</div>
+    <h1>Lead Qualification</h1>
+
+    <div class="meta-bar">
+      <div class="meta-cell">
+        <div class="meta-label">Status</div>
+        <div class="meta-value"><span class="status-dot"></span>Active</div>
+      </div>
+      <div class="meta-cell">
+        <div class="meta-label">Frequency</div>
+        <div class="meta-value">Real-time</div>
+      </div>
+      <div class="meta-cell">
+        <div class="meta-label">Apps</div>
+        <div class="meta-value">4 — Website, HubSpot, Clay, Slack</div>
+      </div>
+      <div class="meta-cell">
+        <div class="meta-label">Last reviewed</div>
+        <div class="meta-value">2026-07-08</div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item"><span class="legend-swatch" style="background:var(--accent)"></span>Automatic step</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:var(--manual)"></span>Manual step</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:var(--warn)"></span>Known failure mode</div>
+    </div>
+
+    <div class="pipeline">
+
+      <!-- Step 1 -->
+      <div class="step-row">
+        <div class="node-col"><div class="node">1</div><div class="rail"></div></div>
+        <div class="card">
+          <div class="card-head">
+            <span class="app-tag website">WEBSITE</span>
+            <div class="badge-row"><span class="badge">Event</span><span class="badge">Automatic</span></div>
+          </div>
+          <p class="step-title">Visitor submits contact form</p>
+          <div class="step-direction">Website <span class="arrow">→</span> HubSpot</div>
+          <div class="step-foot">
+            <div class="data-chips"><span class="chip">name</span><span class="chip">email</span><span class="chip">company</span></div>
+            <div class="owner">Owner: <strong>—</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step-row">
+        <div class="node-col"><div class="node">2</div><div class="rail"></div></div>
+        <div class="card">
+          <div class="card-head">
+            <span class="app-tag hubspot">HUBSPOT</span>
+            <div class="badge-row"><span class="badge">Event</span><span class="badge">Automatic</span></div>
+          </div>
+          <p class="step-title">Create / update contact record</p>
+          <div class="step-direction">internal</div>
+          <div class="step-foot">
+            <div class="data-chips"><span class="chip">contact fields</span></div>
+            <div class="owner">Owner: <strong>—</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step-row">
+        <div class="node-col"><div class="node">3</div><div class="rail"></div></div>
+        <div class="card">
+          <div class="card-head">
+            <span class="app-tag clay">CLAY</span>
+            <div class="badge-row"><span class="badge">Webhook</span><span class="badge">Automatic</span></div>
+          </div>
+          <p class="step-title">Enrich company data — headcount, funding, industry</p>
+          <div class="step-direction">HubSpot <span class="arrow">→</span> Clay <span class="arrow">→</span> HubSpot</div>
+          <div class="step-foot">
+            <div class="data-chips"><span class="chip">domain</span><span class="chip">headcount</span><span class="chip">funding</span><span class="chip">industry</span></div>
+            <div class="owner">Owner: <strong>—</strong></div>
+          </div>
+        </div>
+      </div>
+      <div class="flag">
+        <span class="flag-mark">!</span>
+        <span>Enrichment occasionally times out on smaller / unlisted companies. Lead still scores, just with fewer signals — not currently flagged when this happens.</span>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="step-row">
+        <div class="node-col"><div class="node">4</div><div class="rail"></div></div>
+        <div class="card">
+          <div class="card-head">
+            <span class="app-tag hubspot">HUBSPOT</span>
+            <div class="badge-row"><span class="badge">Rule</span><span class="badge">Automatic</span></div>
+          </div>
+          <p class="step-title">Score lead based on enrichment + form data</p>
+          <div class="step-direction">internal</div>
+          <div class="step-foot">
+            <div class="data-chips"><span class="chip">lead_score</span></div>
+            <div class="owner">Owner: <strong>—</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+      <div class="step-row">
+        <div class="node-col"><div class="node">5</div><div class="rail manual-rail"></div></div>
+        <div class="card">
+          <div class="card-head">
+            <span class="app-tag hubspot">HUBSPOT</span>
+            <div class="badge-row"><span class="badge">Event</span><span class="badge">Automatic</span></div>
+          </div>
+          <p class="step-title">Post summary to Slack if score &gt; 80</p>
+          <div class="step-direction">HubSpot <span class="arrow">→</span> Slack</div>
+          <div class="step-foot">
+            <div class="data-chips"><span class="chip">name</span><span class="chip">company</span><span class="chip">score</span><span class="chip">source</span></div>
+            <div class="owner">Owner: <strong>—</strong></div>
+          </div>
+        </div>
+      </div>
+      <div class="flag">
+        <span class="flag-mark">!</span>
+        <span>No fallback if the Slack post fails silently (e.g. an archived channel) — a lead can sit unclaimed with no alert.</span>
+      </div>
+
+      <!-- Manual gate: steps 6-7 -->
+      <div class="gate-wrap">
+        <div class="gate-label">Only manual gate in the workflow</div>
+
+        <div class="step-row">
+          <div class="node-col"><div class="node manual">6</div><div class="rail manual-rail"></div></div>
+          <div class="card manual-card">
+            <div class="card-head">
+              <span class="app-tag slack">SLACK / AE</span>
+              <div class="badge-row"><span class="badge manual">Manual</span><span class="badge manual">Manual</span></div>
+            </div>
+            <p class="step-title">AE reviews and claims the lead</p>
+            <div class="step-direction">Slack <span class="arrow">→</span> AE</div>
+            <div class="step-foot">
+              <div class="data-chips"><span class="chip">—</span></div>
+              <div class="owner">Owner: <strong>Dave, SDR</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-row">
+          <div class="node-col"><div class="node manual">7</div></div>
+          <div class="card manual-card">
+            <div class="card-head">
+              <span class="app-tag hubspot">HUBSPOT</span>
+              <div class="badge-row"><span class="badge manual">Manual</span><span class="badge manual">Manual</span></div>
+            </div>
+            <p class="step-title">AE updates deal stage to "Working"</p>
+            <div class="step-direction">internal</div>
+            <div class="step-foot">
+              <div class="data-chips"><span class="chip">deal_stage</span></div>
+              <div class="owner">Owner: <strong>Julie, Admin</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="notes">
+      <div class="section-label">Notes &amp; Failure Modes</div>
+      <ul class="note-list">
+        <li><span class="note-ref">Step 3</span><span>Clay enrichment occasionally times out on smaller/unlisted companies — lead still scores, just with fewer signals. Not currently flagged when this happens.</span></li>
+        <li><span class="note-ref">Step 5</span><span>No fallback if the Slack notification fails silently (e.g. channel archived) — lead can sit unclaimed. Worth adding a daily "unclaimed leads" digest.</span></li>
+        <li class="info"><span class="note-ref">Step 6–7</span><span>The only manual gate in the workflow — everything else runs unattended.</span></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
